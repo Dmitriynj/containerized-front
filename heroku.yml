@@ -1,0 +1,11 @@
+build:
+  docker:
+    web: Dockerfile
+  config:
+    NODE_ENV: production
+    API_URL: https://containerized-back.herokuapp.com/api
+    PORT: 3000
+    APP_ID: 15169770c87cc52
+    API_KEY: 117d1888adf17b41d8382087e378bb364ef10925
+run:
+  web: npm start
