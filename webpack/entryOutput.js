@@ -1,7 +1,7 @@
 const { resolve } = require('path');
 
 module.exports = (sourcePath, distPath, hash, env) => ({
-  entry: resolve(sourcePath, 'index.js'),
+  entry: resolve(sourcePath, 'index.tsx'),
   output: {
     pathinfo: true,
     path: distPath,
@@ -10,7 +10,7 @@ module.exports = (sourcePath, distPath, hash, env) => ({
     chunkFilename: `js/chunk/[name].[${hash}].js`
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js'],
     modules: ['node_modules', sourcePath]
   }
 });

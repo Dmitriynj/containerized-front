@@ -1,0 +1,22 @@
+.msg-content {
+  width: 300px;
+  height: 2px;
+}
+
+.msg-avatar {
+  display: flex;
+  max-width: 30px;
+  margin-top: 6px;
+}
+
+.msg-skeleton {
+  height: 10px;
+}
+
+.msg-skeleton__title {
+  margin: 0;
+}
+
+.msg-skeleton__paragraph {
+
+}

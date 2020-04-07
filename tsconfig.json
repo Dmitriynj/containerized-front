@@ -1,0 +1,11 @@
+{
+  "include": ["./src"],
+  "extends": "./node_modules/react-redux-typescript-scripts/tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es6",
+    "types": ["node"]
+  }
+}

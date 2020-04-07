@@ -8,8 +8,6 @@ module.exports = env => {
       new DefinePlugin({
         'process.env': {
           API_URL: JSON.stringify(`${process.env.API_URL}`),
-          APP_ID: JSON.stringify(`${process.env.APP_ID}`),
-          API_KEY: JSON.stringify(`${process.env.API_KEY}`)
         }
       }),
       new MiniCssExtractPlugin({

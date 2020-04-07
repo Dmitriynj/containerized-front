@@ -25,8 +25,11 @@ module.exports = (sourcePath, hash) => ({
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        },
         include: sourcePath
       },
       {

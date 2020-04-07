@@ -1,0 +1,37 @@
+.msg-form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.msg-form-item {
+  display: flex;
+  margin-top: 8px;
+  margin-right: 4px;
+  flex-grow: 1;
+}
+
+.msg-input {
+  display: flex;
+  min-width: 280px;
+  border-radius: 24px;
+  resize: none;
+  overflow: hidden;
+}
+
+.msg-send {
+  display: flex;
+  border-radius: 20px;
+}
+
+.msg-form-item__avatar {
+  display: flex;
+  margin-top: 6px;
+  margin-right: 4px;
+}
+
+.msg-form-item__skeleton {
+  display: flex;
+  max-width: 30px;
+  margin-top: 6px;
+}
