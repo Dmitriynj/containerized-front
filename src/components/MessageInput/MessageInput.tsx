@@ -1,53 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './MessageInput.css';
-import { debounce, isEmpty } from 'lodash';
-import { Avatar, Button, Input, Form, Skeleton } from 'antd';
-import {SendOutlined} from '@ant-design/icons';
+import { isEmpty } from 'lodash';
+import { Avatar, Button, Input, Form } from 'antd';
+import { LoadingOutlined, SendOutlined } from '@ant-design/icons';
+import { useDebounceFn } from '@umijs/hooks';
+import { useUserContext } from '../common/hooks/UseUserContext/UseUserContext';
+import { UserType } from '../common/context/UserContext';
 
 const { TextArea } = Input;
 const FIELD_NAME = 'message';
+const TEXT_AREA_MAX_ROWS = 2;
+const TEXT_AREA_MIN_ROWS = 1;
+const DEBOUNCE_WAIT = 300;
 
 type MessageInput = {
-  loading: boolean;
+  message: string | undefined;
+  submitting: boolean;
+  onChangeMessage(event: React.ChangeEvent<HTMLTextAreaElement>): void;
+  onSendMessage(message: string | undefined): void;
 };
 
-const MessageInput = ({ loading }: MessageInput) => {
+const MessageInput = ({
+  message,
+  submitting,
+  onChangeMessage,
+  onSendMessage,
+}: MessageInput) => {
+  const { user } = useUserContext();
   const [form] = Form.useForm();
-  const [value, setValue] = useState<string>();
-  const [submitting, setSubmitting] = useState<boolean>(loading);
+  const { run: sendMessage } = useDebounceFn(() => {
+    onSendMessage(message);
+  }, DEBOUNCE_WAIT);
+  const sendIcon = submitting ? <LoadingOutlined /> : <SendOutlined />;
+  const avatarLink =
+    user && user.avatarLink !== '' ? user.avatarLink : undefined;
 
-  const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(event.currentTarget.value);
+  const onSend = () => {
+    if (!isEmpty(message)) {
+      sendMessage();
+      form.resetFields();
+    }
   };
 
   const onPressEnter = () => form.submit();
-
-  const onSend = (values: { [name: string]: any }) => {
-    setSubmitting(true);
-    if (!isEmpty(value)) {
-      debounce(() => {
-        // some async call
-        console.log(values[FIELD_NAME]);
-      }, 300);
-      form.resetFields();
-    }
-    setSubmitting(false);
-  };
-
-  const avatarIcon = loading ? (
-    <Skeleton.Avatar
-      className='msg-form-item__skeleton'
-      active={true}
-      size={26}
-      shape={'circle'}
-    />
-  ) : (
-    <Avatar
-      className='msg-form-item__avatar'
-      src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-      alt='Han Solo'
-    />
-  );
 
   return (
     <Form
@@ -56,14 +51,21 @@ const MessageInput = ({ loading }: MessageInput) => {
       name='message-input'
       onFinish={onSend}
     >
-      {avatarIcon}
+      <Avatar
+        className='msg-form-item__avatar'
+        src={avatarLink}
+        alt='Han Solo'
+      />
       <Form.Item className='msg-form-item' name={FIELD_NAME}>
         <TextArea
           className='msg-input'
           placeholder='Type message'
-          autoSize={{ minRows: 1, maxRows: 2 }}
-          onChange={onChange}
-          value={value}
+          autoSize={{
+            minRows: TEXT_AREA_MIN_ROWS,
+            maxRows: TEXT_AREA_MAX_ROWS,
+          }}
+          onChange={onChangeMessage}
+          value={message}
           onPressEnter={onPressEnter}
         />
       </Form.Item>
@@ -71,10 +73,10 @@ const MessageInput = ({ loading }: MessageInput) => {
         <Button
           type='primary'
           htmlType='submit'
-          className='msg-send'
+          className={`msg-send msg-send__is-submiting_${submitting}`}
           loading={submitting}
         >
-          <SendOutlined />
+          {sendIcon}
         </Button>
       </Form.Item>
     </Form>

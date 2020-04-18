@@ -1,52 +1,45 @@
 import React from 'react';
 import './MessageItem.css';
-import { Avatar, Comment, Skeleton, Tooltip } from 'antd';
+import { Avatar, Comment, Tooltip } from 'antd';
 import moment from 'moment';
 
-type MessageItem = {
-  loading: boolean;
+type MessageItemType = {
+  avatarLink: string;
+  message: string;
+  owner: string;
+  effDateTime: string;
+  origin: 'my' | 'not-mine'
 };
 
-const MessageItem = ({ loading }: MessageItem) => {
-  const content = loading ? (
-    <Skeleton
-      className='msg-skeleton'
-      avatar={{ shape: 'circle', size: 26 }}
-      title={{
-        style: {
-          'margin-top': 6,
-        },
-      }}
-      paragraph={{
-        rows: 1,
-        style: {
-          'margin-top': 10,
-        },
-      }}
-      active
-    />
-  ) : (
-    <Comment
-      avatar={
-        <Avatar
-          src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-          alt='Han Solo'
-        />
-      }
-      content={
-        <div>
-          Hi,someloremtextsdfsdgfasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-        </div>
-      }
-      datetime={
-        <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-          <span>{moment().fromNow()}</span>
-        </Tooltip>
-      }
-    ></Comment>
-  );
+const MessageItem = ({ avatarLink, message, effDateTime, owner, origin }: MessageItemType) => {
+  const momentEffDateTime = moment(effDateTime);
 
-  return <div className='msg-content'>{content}</div>;
+  let avatar = null;
+  let author = null;
+  if(origin === 'my') {
+    author = <a>Me</a>;
+  } else {
+    author = <a>{owner}</a>;
+    avatar = <Avatar src={avatarLink} alt={owner} />;
+  }
+
+  return (
+    <div className='msg-item'>
+      <Comment
+        className={`msg-item__specific msg-item__whose_${origin}`}
+        author={author}
+        avatar={avatar}
+        content={<span>{message}</span>}
+        datetime={
+          <Tooltip title={effDateTime}>
+            <span>{momentEffDateTime.fromNow()}</span>
+          </Tooltip>
+        }
+      ></Comment>
+    </div>
+  );
 };
 
 export { MessageItem };
+
+export type { MessageItemType };

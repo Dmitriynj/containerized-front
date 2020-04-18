@@ -1,0 +1,18 @@
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.product-row__stocked {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  color: red;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
