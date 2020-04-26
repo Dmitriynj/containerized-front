@@ -1,0 +1,7 @@
+
+
+const useContentAnimation = () => {
+
+}
+
+export {useContentAnimation};

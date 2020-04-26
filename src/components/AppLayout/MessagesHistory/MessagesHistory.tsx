@@ -1,7 +1,7 @@
 import React from 'react';
 import { MessageItemType, MessageItem } from '../MessageItem/MessageItem';
 import './MessagesHistory.css';
-import { useScrollbar } from '../common/hooks/UseScrollbar/UseScrollbar';
+import { useScrollbar } from '../../common/hooks/UseScrollbar/UseScrollbar';
 
 type MessageHistoryType = {
   messages: (MessageItemType & { id: number })[];

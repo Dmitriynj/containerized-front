@@ -3,8 +3,7 @@ import './MessangerContent.css';
 import { MessageHistory } from '../MessagesHistory/MessagesHistory';
 import { MessageInput } from '../MessageInput/MessageInput';
 import { MessageItemType } from '../MessageItem/MessageItem';
-import { UserContextProvider } from '../common/context/UserContextProvider';
-import { LoginForm } from '../common/components/Login/LoginForm';
+import { AuthContextProvider } from '../../common/context/AuthContextProvider';
 
 type MessangerContentType = {
   messages: (MessageItemType & { id: number })[];
@@ -12,7 +11,7 @@ type MessangerContentType = {
 
 const MessangerContent = ({ messages }: MessangerContentType) => {
   return (
-    <UserContextProvider>
+    <AuthContextProvider>
       <MessageHistory messages={messages}></MessageHistory>
       <MessageInput
         submitting={false}
@@ -20,8 +19,8 @@ const MessangerContent = ({ messages }: MessangerContentType) => {
         onChangeMessage={() => {}}
         onSendMessage={() => {}}
       />
-      <LoginForm />
-    </UserContextProvider>
+      {/* <LoginForm /> */}
+    </AuthContextProvider>
   );
 };
 

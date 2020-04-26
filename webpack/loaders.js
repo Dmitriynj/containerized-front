@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Sass = require('sass');
+const path = require('path');
 
 module.exports = (sourcePath, hash) => ({
   module: {
@@ -7,7 +8,7 @@ module.exports = (sourcePath, hash) => ({
       {
         test: /\.html$/,
         loader: 'html-loader',
-        options: { minimize: true }
+        options: { minimize: true },
       },
       {
         test: /\.s[ac]ss$/i,
@@ -16,9 +17,9 @@ module.exports = (sourcePath, hash) => ({
           'css-loader',
           {
             loader: 'sass-loader',
-            options: { implementation: Sass }
-          }
-        ]
+            options: { implementation: Sass },
+          },
+        ],
       },
       {
         test: /\.css$/i,
@@ -28,18 +29,29 @@ module.exports = (sourcePath, hash) => ({
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         },
-        include: sourcePath
+        include: sourcePath,
       },
       {
-        test: /\.(png|gif|jpg|jpeg|webp|svg)$/i,
-        use: [{ loader: 'url-loader', options: { limit: 10000, name: 'assets/img/[name].[ext]' } }]
+        test: /\.(png|gif|jpg|jpeg|webp)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 10000, name: 'assets/icons/[name].[ext]' },
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
       },
       {
         test: /\.(woff(2)?|ttf|eot|otf)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{ loader: 'file-loader', options: { name: `fonts/[${hash}].[ext]` } }]
-      }
-    ]
-  }
+        use: [
+          { loader: 'file-loader', options: { name: `fonts/[${hash}].[ext]` } },
+        ],
+      },
+    ],
+  },
 });

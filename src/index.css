@@ -1,3 +1,14 @@
+html, body > div {
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  font-family: 'Fira Code', monospace;
+}
+
+#root {
+  width: 100%;
+}
+
 :root {
   --aw-msg-border-my: #c33bcc;
   --aw-msg-border-alien: #f48c45;

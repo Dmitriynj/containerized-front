@@ -19,9 +19,12 @@
     },
     "plugins": [
         "react",
-        "prettier"
+        "prettier",
+        "react-hooks"
     ],
     "rules": { 
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn", 
         "linebreak-style": 0,
         "global-require": 0,
         "eslint linebreak-style": [0, "error", "windows"],

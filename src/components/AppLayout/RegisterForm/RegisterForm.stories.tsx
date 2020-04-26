@@ -5,5 +5,5 @@ import { RegisterForm } from './RegisterForm';
 export const ExampleRegisterForm = () => <RegisterForm />;
 
 export default {
-  title: 'RegisterForm',
+  title: 'ExampleRegisterForm',
 };

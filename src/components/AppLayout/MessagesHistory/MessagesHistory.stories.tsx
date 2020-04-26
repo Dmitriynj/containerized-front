@@ -1,15 +1,15 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { MessangerContent } from './MessangerContent';
+import { MessageHistory } from './MessagesHistory';
 import moment from 'moment';
-import { DATE_TIME_PATTERN } from '../common/constants/DateTimeConstants';
+import { DATE_TIME_PATTERN } from '../../common/constants/DateTimeConstants';
 
 const momentNow = moment().format(DATE_TIME_PATTERN);
 const avatarLink =
   'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
 
-export const ExampleMessangerContent = () => (
-  <MessangerContent
+export const ExampleMessageHistory = () => (
+  <MessageHistory
     messages={[
       {
         id: 1,
@@ -56,5 +56,5 @@ export const ExampleMessangerContent = () => (
 );
 
 export default {
-  title: 'MessangerContent',
+  title: 'MessageHistory',
 };

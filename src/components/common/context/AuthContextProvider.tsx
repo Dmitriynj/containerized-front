@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { UserContext, UserType } from './UserContext';
+import { AuthContext, UserType } from './AuthContext';
 
-const UserContextProvider = ({ children }: { children: any }) => {
+const AuthContextProvider = ({ children }: { children: any }) => {
   const [user, setUser] = useState<UserType | null>(null);
 
   const value: any = useMemo(() => {
@@ -11,7 +11,7 @@ const UserContextProvider = ({ children }: { children: any }) => {
     };
   }, [user, setUser]);
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export { UserContextProvider };
+export { AuthContextProvider };

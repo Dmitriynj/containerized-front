@@ -4,8 +4,7 @@ import { isEmpty } from 'lodash';
 import { Avatar, Button, Input, Form } from 'antd';
 import { LoadingOutlined, SendOutlined } from '@ant-design/icons';
 import { useDebounceFn } from '@umijs/hooks';
-import { useUserContext } from '../common/hooks/UseUserContext/UseUserContext';
-import { UserType } from '../common/context/UserContext';
+// import { useAuthContext } from '../common/hooks/UseAuthContext/UseAuthContext';
 
 const { TextArea } = Input;
 const FIELD_NAME = 'message';
@@ -26,14 +25,12 @@ const MessageInput = ({
   onChangeMessage,
   onSendMessage,
 }: MessageInput) => {
-  const { user } = useUserContext();
+  // const { user } = useAuthContext();
   const [form] = Form.useForm();
   const { run: sendMessage } = useDebounceFn(() => {
     onSendMessage(message);
   }, DEBOUNCE_WAIT);
   const sendIcon = submitting ? <LoadingOutlined /> : <SendOutlined />;
-  const avatarLink =
-    user && user.avatarLink !== '' ? user.avatarLink : undefined;
 
   const onSend = () => {
     if (!isEmpty(message)) {
@@ -53,7 +50,7 @@ const MessageInput = ({
     >
       <Avatar
         className='msg-form-item__avatar'
-        src={avatarLink}
+        // src={avatarLink}
         alt='Han Solo'
       />
       <Form.Item className='msg-form-item' name={FIELD_NAME}>
