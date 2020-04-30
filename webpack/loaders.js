@@ -1,6 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Sass = require('sass');
-const path = require('path');
 
 module.exports = (sourcePath, hash) => ({
   module: {
@@ -44,7 +43,14 @@ module.exports = (sourcePath, hash) => ({
       },
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack'],
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              svgo: false,
+            },
+          },
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot|otf)(\?v=\d+\.\d+\.\d+)?$/,

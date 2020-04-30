@@ -1,6 +1,8 @@
 import { TimelineMax as Timeline, Power1 } from 'gsap';
 
-const enterRegisterFormTimeline = (node: HTMLElement, delay: number) => {
+const DELAY = 0.5;
+
+const enterRegisterFormTimeline = (node: HTMLElement) => {
   const timeline = new Timeline({ paused: true });
   const content = node.querySelector('.site-layout-content > div');
 
@@ -8,7 +10,7 @@ const enterRegisterFormTimeline = (node: HTMLElement, delay: number) => {
     .from(node, 0.5, {
       display: 'block',
       autoAlpha: 0,
-      delay,
+      DELAY,
       ease: Power1.easeIn,
     })
     .set(node, { display: 'block' })
@@ -21,9 +23,7 @@ const enterRegisterFormTimeline = (node: HTMLElement, delay: number) => {
   return timeline;
 };
 
-const exitRegisterFormTimeline = (node: HTMLElement) => {
-  const timeline = new Timeline({ paused: true });
-  timeline.to(node, 0.15, { autoAlpha: 0, ease: Power1.easeOut });
+const exitRegisterFormTimeline = (timeline: Timeline) => {
   return timeline;
 };
 

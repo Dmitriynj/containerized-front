@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { useAuthContext } from '../common/hooks/UseAuthContext/UseAuthContext';
 import { RegisterForm } from './RegisterForm/RegisterForm';
 import { MessangerContent } from './MessangerContent/MessangerContent';
-import BackgroundImage from '../../assets/icons/shapes112.svg';
-import {AnimatedConent} from '../common/components/AnimatedContent/AnimatedContent';
+import BackgroundImage from '../../assets/icons/background.svg';
+import { useAnimation } from '../common/hooks/UseAnimation/UseAnimation';
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
   const { user } = useAuthContext();
@@ -25,18 +25,20 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
 };
 
 const AppLayout = () => {
+  const animatedRef = useAnimation('BackgroundImageTimeline');
+
   return (
     <>
-      <AnimatedConent type='BackgroundImageTimeline' timeout={{ enter: 750, exit: 150 }}>
-        <BackgroundImage/>
-      </AnimatedConent>
-      {/* <Layout className='layout layout-stretched'>
+      <div ref={animatedRef}>
+        <BackgroundImage id="background" />
+      </div>
+      <Layout className='layout layout-stretched'>
         <Router>
           <Route path='/register' component={RegisterForm} />
           <PrivateRoute path='/' component={MessangerContent} />
           <PrivateRoute path='/messanger' component={MessangerContent} />
         </Router>
-      </Layout> */}
+      </Layout>
     </>
   );
 };
