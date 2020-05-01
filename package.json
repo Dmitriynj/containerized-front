@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "yarn run prod && node server.js",
-    "dev": "./node_modules/.bin/webpack-dev-server --env.MODE=dev --mode development --open --host 0.0.0.0",
+    "dev": "webpack-dev-server --env.MODE=dev --mode development --open --host 0.0.0.0",
     "prod": "webpack --env.MODE=prod --mode production --progress",
     "lint": "eslint \"./src/**/*.js\" \"./webpack/**/*.js\"",
     "storybook": "start-storybook -p 6006",
