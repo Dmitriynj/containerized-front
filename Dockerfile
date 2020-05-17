@@ -8,8 +8,8 @@ WORKDIR /usr/src/front
 ENV API_URL=https://containerized-back.herokuapp.com/api
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV APP_ID=15169770c87cc52
-ENV API_KEY=117d1888adf17b41d8382087e378bb364ef10925
+ENV APP_ID=some
+ENV API_KEY=some
 
 COPY package*.json ./
 

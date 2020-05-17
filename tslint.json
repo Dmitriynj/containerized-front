@@ -4,5 +4,6 @@
     "react-redux-typescript-scripts/tslint-react.json"
   ],
   "rules": {
+    "quotemark": [true, "single", "jsx-double"]
   }
 }
